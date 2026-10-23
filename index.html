@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnet Calculator BD</title>
+<meta name="description" content="Offline IPv4 subnet calculator: CIDR math, subnet splitter, IP classification. Bilingual EN/Bangla.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">🌐</span>
+    <div>
+      <h1 data-i18n="title">Subnet Calculator BD</h1>
+      <p class="tagline" data-i18n="tagline">IPv4 subnetting, fully offline</p>
+    </div>
+  </div>
+  <div class="controls">
+    <label class="digits"><input type="checkbox" id="bndigits"> <span>০১২৩</span></label>
+    <button id="lang-btn" class="btn ghost" type="button">বাংলা</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button id="tab-calc" class="tab active" role="tab" type="button" data-i18n="tab_calc">Calculator</button>
+  <button id="tab-split" class="tab" role="tab" type="button" data-i18n="tab_split">Splitter</button>
+  <button id="tab-checks" class="tab" role="tab" type="button" data-i18n="tab_checks">IP Checks</button>
+</nav>
+
+<main>
+  <section id="pane-calc" class="pane active" role="tabpanel">
+    <h2 data-i18n="calc_heading">CIDR Calculator</h2>
+    <div class="form">
+      <label for="cidr-input" data-i18n="cidr_label">IPv4 address + prefix (e.g. 192.168.1.10/24)</label>
+      <input id="cidr-input" class="mono" type="text" inputmode="text" autocomplete="off"
+             data-i18n-ph="cidr_placeholder" placeholder="192.168.1.10/24">
+      <div class="btnrow">
+        <button id="compute-btn" class="btn primary" type="button" data-i18n="compute_btn">Compute subnet</button>
+        <button id="sample-btn" class="btn" type="button" data-i18n="sample_btn">Try sample</button>
+        <button id="clear-btn" class="btn" type="button" data-i18n="clear_btn">Clear</button>
+      </div>
+    </div>
+    <div id="calc-result" class="result" aria-live="polite"></div>
+  </section>
+
+  <section id="pane-split" class="pane" role="tabpanel">
+    <h2 data-i18n="split_heading">Subnet Splitter</h2>
+    <div class="form">
+      <label for="split-input" data-i18n="split_net_label">Network (CIDR), e.g. 192.168.0.0/24</label>
+      <input id="split-input" class="mono" type="text" autocomplete="off" placeholder="192.168.0.0/24">
+      <fieldset class="modes">
+        <legend data-i18n="split_mode_label">Split by</legend>
+        <label class="radio"><input type="radio" name="split-mode" value="count" checked>
+          <span data-i18n="split_mode_count">Number of subnets</span></label>
+        <label class="radio"><input type="radio" name="split-mode" value="prefix">
+          <span data-i18n="split_mode_prefix">New prefix length</span></label>
+      </fieldset>
+      <div class="grid2">
+        <div>
+          <label for="split-count" data-i18n="split_count_label">Subnets wanted</label>
+          <input id="split-count" class="mono" type="number" min="1" max="65536" value="4">
+        </div>
+        <div>
+          <label for="split-prefix" data-i18n="split_prefix_label">New prefix</label>
+          <input id="split-prefix" class="mono" type="number" min="0" max="32" value="26">
+        </div>
+      </div>
+      <div class="btnrow">
+        <button id="split-btn" class="btn primary" type="button" data-i18n="split_btn">Split</button>
+      </div>
+    </div>
+    <div id="split-result" class="result" aria-live="polite"></div>
+  </section>
+
+  <section id="pane-checks" class="pane" role="tabpanel">
+    <h2 data-i18n="checks_heading">IP Address Checks</h2>
+    <div class="form">
+      <label for="checks-input" data-i18n="checks_label">IPv4 address to inspect</label>
+      <input id="checks-input" class="mono" type="text" autocomplete="off" placeholder="8.8.8.8">
+      <div class="btnrow">
+        <button id="checks-btn" class="btn primary" type="button" data-i18n="checks_btn">Check address</button>
+      </div>
+    </div>
+    <div id="checks-result" class="result" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  <p class="offline" data-i18n="offline_note">100% offline — nothing you type ever leaves this page.</p>
+  <p data-i18n="footer">Built as a personal offline networking tool. Subnet math follows standard IPv4 rules.</p>
+</footer>
+
+<script src="js/subnet.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
